@@ -1,0 +1,45 @@
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center" [ngStyle]="{'background-image': userType === 'admin' ? 
+                'url(fondo-admin.jpg)' : 
+                'url(fondo-usuario.png)'}">
+    <div class="w-full max-w-md p-8 space-y-8 rounded-lg shadow-lg bg-white bg-opacity-90 backdrop-blur-sm">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900">{{loginTitle}}</h2>
+            <p class="mt-2 text-sm text-gray-600">
+                {{ userType === 'admin' ?
+                'Ingrese sus credenciales administrativas' :
+                'Ingrese sus credenciales de usuario' }}
+            </p>
+        </div>
+
+        <form class="mt-8 space-y-6">
+        
+            <div>
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ userType === 'admin' ? 'Email Administrativo' : 'Email de Usuario' }}
+                </label>
+                <input pInputText type="email" required
+                    [placeholder]="userType === 'admin' ? 'admin@fundacion.com' : 'usuario@fundacion.com'"
+                    class="w-full p-3 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-opacity-50"
+                    [class.focus:ring-blue-500]="userType === 'admin'"
+                    [class.focus:ring-gray-500]="userType !== 'admin'">
+            </div>
+
+        
+            <div class="relative">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                    <p-password id="password" [toggleMask]="true" [feedback]="false" placeholder="••••••••"
+                        inputStyleClass="w-full pl-10 pr-3 py-3"class="[&_.p-password-input]:pl-10 [&_.p-icon]:left-80 [&_.p-icon]:right-auto">
+                    </p-password>
+                </div>
+
+        
+            <div>
+                <p-button [label]="userType === 'admin' ? 'Acceder como Admin' : 'Ingresar como Usuario'" type="submit"
+                    styleClass="w-full transition-all duration-300" [styleClass]="userType === 'admin' ? 
+                                      'p-button-raised bg-blue-600 hover:bg-blue-700' : 
+                                      'p-button-raised bg-gray-600 hover:bg-gray-700'">
+                </p-button>
+            </div>
+        </form>
+    </div>
+</div>

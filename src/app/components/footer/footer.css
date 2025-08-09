@@ -1,0 +1,10 @@
+footer {
+    margin-top: auto;
+    flex-shrink: 0;
+
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 1.5rem;
+    width: 100%;
+}

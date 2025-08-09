@@ -1,0 +1,10 @@
+/* Aumenta el espacio entre items del menubar */
+::ng-deep .p-menubar .p-menuitem:not(:last-child) {
+    margin-right: 1.5rem;
+    /* Ajusta este valor según necesites (24px) */
+}
+
+/* Opcional: Aumentar padding interno de cada item */
+::ng-deep .p-menubar .p-menuitem-link {
+    padding: 0.5rem 1rem;
+}

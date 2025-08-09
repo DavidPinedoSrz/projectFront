@@ -1,0 +1,19 @@
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.admin-background {
+    background-image: url('/fondo-admin.jpg');
+}
+
+.user-background {
+    background-image: url('/fondo-usuario.png');
+}
