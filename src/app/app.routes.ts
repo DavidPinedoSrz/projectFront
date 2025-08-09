@@ -14,5 +14,9 @@ export const routes: Routes = [
     path: 'auth', 
     loadChildren: () => AuthModule,
     },
+    { 
+    path: 'school-management', 
+    loadChildren: () => import('./modules/school-management/school-management-module').then(m => m.SchoolManagementModule),
+    },
     { path: '**', redirectTo: '' }
 ];

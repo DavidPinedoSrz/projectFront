@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SchoolManagementRoutingModule } from './school-management-routing-module';
 
 
@@ -11,4 +10,4 @@ import { SchoolManagementRoutingModule } from './school-management-routing-modul
     SchoolManagementRoutingModule
   ]
 })
-export class SchoolManagementModule { }
+export class SchoolManagementModule {}
