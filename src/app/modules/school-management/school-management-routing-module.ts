@@ -1,54 +1,39 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AcademicLevelList } from './pages/academic-level/academic-level-list/academic-level-list';
+import { DashboardSchoolManagement } from '../school-management/pages/dashboard-school-management/dashboard-school-management';
+import { SchoolList } from '../school-management/pages/school/school-list/school-list';
+import { AcademicLevelList } from '../school-management/pages/academic-level/academic-level-list/academic-level-list';
+import { GradeList } from '../school-management/pages/grade/grade-list/grade-list';
+import { SubjectList } from '../school-management/pages/subject/subject-list/subject-list';
+import { SchoolForm } from './pages/school/school-form/school-form';
 import { AcademicLevelForm } from './pages/academic-level/academic-level-form/academic-level-form';
 import { GradeForm } from './pages/grade/grade-form/grade-form';
-import { GradeList } from './pages/grade/grade-list/grade-list';
-import { SchoolForm } from './pages/school/school-form/school-form';
-import { SchoolList } from './pages/school/school-list/school-list';
 import { SubjectForm } from './pages/subject/subject-form/subject-form';
-import { SubjectList } from './pages/subject/subject-list/subject-list';
 
 const routes: Routes = [
   {
     path: '',
+    component: DashboardSchoolManagement,
     children: [
-        { 
-         path: 'academic-level-form',
-         component: AcademicLevelForm
-      },
-      { 
-         path: 'academic-level-list',
-         component: AcademicLevelList
-      },
-       { 
-         path: 'grade-form',
-         component: GradeForm
-      },
-      { 
-         path: 'grade-list',
-         component: GradeList
-      },
-      { 
-         path: 'school-form',
-         component: SchoolForm
-      },
-      { 
-         path: 'school-list',
-         component: SchoolList
-      },
-      { 
-         path: 'subject-form',
-         component: SubjectForm
-      },
-      { 
-         path: 'subject-list',
-         component: SubjectList
-      },
-      { path: '**', redirectTo: 'login' }
+      { path: 'schools', component: SchoolList },
+      { path: 'schools/new', component: SchoolForm },
+      { path: 'schools/edit/:id', component: SchoolForm },
+      
+      { path: 'academic-levels', component: AcademicLevelList },
+      { path: 'academic-levels/new', component: AcademicLevelForm },
+      { path: 'academic-levels/edit/:id', component: AcademicLevelForm },
+      
+      { path: 'grades', component: GradeList },
+      { path: 'grades/new', component: GradeForm },
+      { path: 'grades/edit/:id', component: GradeForm },
+      
+      { path: 'subjects', component: SubjectList },
+      { path: 'subjects/new', component: SubjectForm },
+      { path: 'subjects/edit/:id', component: SubjectForm },
+      
+      { path: '', redirectTo: 'schools', pathMatch: 'full' }
     ]
-  },
-  
+  }
 ];
 
 @NgModule({

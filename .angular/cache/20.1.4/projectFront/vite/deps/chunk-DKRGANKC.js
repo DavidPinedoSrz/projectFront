@@ -1,43 +1,39 @@
 import {
-  AutoFocus
-} from "./chunk-HF6SREFX.js";
+  Ripple
+} from "./chunk-33C23XZI.js";
 import {
-  Fluid
-} from "./chunk-DE4VPICM.js";
+  AutoFocus
+} from "./chunk-BP7UMXOJ.js";
 import {
   SpinnerIcon
-} from "./chunk-XW2C4SBT.js";
+} from "./chunk-BSKNPIYA.js";
+import {
+  Fluid
+} from "./chunk-ZZ255CRZ.js";
 import {
   BaseComponent
-} from "./chunk-GGGE67RJ.js";
+} from "./chunk-KW7STLWU.js";
 import {
   BaseStyle
-} from "./chunk-573MFGI2.js";
+} from "./chunk-WGIJHORR.js";
 import {
   PrimeTemplate,
   SharedModule
-} from "./chunk-KA7PGSXM.js";
+} from "./chunk-JGRWLLCC.js";
 import {
-  C,
-  K,
   O,
-  Qt,
   R,
-  Rt,
-  Tt,
   W,
   a,
   s,
   s3 as s2,
-  v,
   z2 as z
-} from "./chunk-TWPC2OMC.js";
+} from "./chunk-3OOFQIRO.js";
 import {
   CommonModule,
   NgIf,
   NgStyle,
-  NgTemplateOutlet,
-  isPlatformBrowser
+  NgTemplateOutlet
 } from "./chunk-ZE6V4YBD.js";
 import {
   ChangeDetectionStrategy,
@@ -49,13 +45,11 @@ import {
   Injectable,
   Input,
   NgModule,
-  NgZone,
   Output,
   ViewEncapsulation,
   booleanAttribute,
   computed,
   contentChild,
-  effect,
   inject,
   input,
   numberAttribute,
@@ -539,200 +533,8 @@ var BadgeModule = class _BadgeModule {
   }], null, null);
 })();
 
-// node_modules/@primeuix/styles/dist/ripple/index.mjs
-var style2 = "\n    .p-ink {\n        display: block;\n        position: absolute;\n        background: dt('ripple.background');\n        border-radius: 100%;\n        transform: scale(0);\n        pointer-events: none;\n    }\n\n    .p-ink-active {\n        animation: ripple 0.4s linear;\n    }\n\n    @keyframes ripple {\n        100% {\n            opacity: 0;\n            transform: scale(2.5);\n        }\n    }\n";
-
-// node_modules/primeng/fesm2022/primeng-ripple.mjs
-var theme2 = (
-  /*css*/
-  `
-    ${style2}
-    /* For PrimeNG */
-    .p-ripple {
-        overflow: hidden;
-        position: relative;
-    }
-
-    .p-ripple-disabled .p-ink {
-        display: none !important;
-    }
-
-    @keyframes ripple {
-        100% {
-            opacity: 0;
-            transform: scale(2.5);
-        }
-    }
-`
-);
-var classes2 = {
-  root: "p-ink"
-};
-var RippleStyle = class _RippleStyle extends BaseStyle {
-  name = "ripple";
-  theme = theme2;
-  classes = classes2;
-  static ɵfac = /* @__PURE__ */ (() => {
-    let ɵRippleStyle_BaseFactory;
-    return function RippleStyle_Factory(__ngFactoryType__) {
-      return (ɵRippleStyle_BaseFactory || (ɵRippleStyle_BaseFactory = ɵɵgetInheritedFactory(_RippleStyle)))(__ngFactoryType__ || _RippleStyle);
-    };
-  })();
-  static ɵprov = ɵɵdefineInjectable({
-    token: _RippleStyle,
-    factory: _RippleStyle.ɵfac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RippleStyle, [{
-    type: Injectable
-  }], null, null);
-})();
-var RippleClasses;
-(function(RippleClasses2) {
-  RippleClasses2["root"] = "p-ink";
-})(RippleClasses || (RippleClasses = {}));
-var Ripple = class _Ripple extends BaseComponent {
-  zone = inject(NgZone);
-  _componentStyle = inject(RippleStyle);
-  animationListener;
-  mouseDownListener;
-  timeout;
-  constructor() {
-    super();
-    effect(() => {
-      if (isPlatformBrowser(this.platformId)) {
-        if (this.config.ripple()) {
-          this.zone.runOutsideAngular(() => {
-            this.create();
-            this.mouseDownListener = this.renderer.listen(this.el.nativeElement, "mousedown", this.onMouseDown.bind(this));
-          });
-        } else {
-          this.remove();
-        }
-      }
-    });
-  }
-  ngAfterViewInit() {
-    super.ngAfterViewInit();
-  }
-  onMouseDown(event) {
-    let ink = this.getInk();
-    if (!ink || this.document.defaultView?.getComputedStyle(ink, null).display === "none") {
-      return;
-    }
-    O(ink, "p-ink-active");
-    if (!Tt(ink) && !Rt(ink)) {
-      let d = Math.max(v(this.el.nativeElement), C(this.el.nativeElement));
-      ink.style.height = d + "px";
-      ink.style.width = d + "px";
-    }
-    let offset = K(this.el.nativeElement);
-    let x = event.pageX - offset.left + this.document.body.scrollTop - Rt(ink) / 2;
-    let y = event.pageY - offset.top + this.document.body.scrollLeft - Tt(ink) / 2;
-    this.renderer.setStyle(ink, "top", y + "px");
-    this.renderer.setStyle(ink, "left", x + "px");
-    W(ink, "p-ink-active");
-    this.timeout = setTimeout(() => {
-      let ink2 = this.getInk();
-      if (ink2) {
-        O(ink2, "p-ink-active");
-      }
-    }, 401);
-  }
-  getInk() {
-    const children = this.el.nativeElement.children;
-    for (let i = 0; i < children.length; i++) {
-      if (typeof children[i].className === "string" && children[i].className.indexOf("p-ink") !== -1) {
-        return children[i];
-      }
-    }
-    return null;
-  }
-  resetInk() {
-    let ink = this.getInk();
-    if (ink) {
-      O(ink, "p-ink-active");
-    }
-  }
-  onAnimationEnd(event) {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    O(event.currentTarget, "p-ink-active");
-  }
-  create() {
-    let ink = this.renderer.createElement("span");
-    this.renderer.addClass(ink, "p-ink");
-    this.renderer.appendChild(this.el.nativeElement, ink);
-    this.renderer.setAttribute(ink, "aria-hidden", "true");
-    this.renderer.setAttribute(ink, "role", "presentation");
-    if (!this.animationListener) {
-      this.animationListener = this.renderer.listen(ink, "animationend", this.onAnimationEnd.bind(this));
-    }
-  }
-  remove() {
-    let ink = this.getInk();
-    if (ink) {
-      this.mouseDownListener && this.mouseDownListener();
-      this.animationListener && this.animationListener();
-      this.mouseDownListener = null;
-      this.animationListener = null;
-      Qt(ink);
-    }
-  }
-  ngOnDestroy() {
-    if (this.config && this.config.ripple()) {
-      this.remove();
-    }
-    super.ngOnDestroy();
-  }
-  static ɵfac = function Ripple_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _Ripple)();
-  };
-  static ɵdir = ɵɵdefineDirective({
-    type: _Ripple,
-    selectors: [["", "pRipple", ""]],
-    hostAttrs: [1, "p-ripple"],
-    features: [ɵɵProvidersFeature([RippleStyle]), ɵɵInheritDefinitionFeature]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(Ripple, [{
-    type: Directive,
-    args: [{
-      selector: "[pRipple]",
-      host: {
-        class: "p-ripple"
-      },
-      standalone: true,
-      providers: [RippleStyle]
-    }]
-  }], () => [], null);
-})();
-var RippleModule = class _RippleModule {
-  static ɵfac = function RippleModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _RippleModule)();
-  };
-  static ɵmod = ɵɵdefineNgModule({
-    type: _RippleModule,
-    imports: [Ripple],
-    exports: [Ripple]
-  });
-  static ɵinj = ɵɵdefineInjector({});
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RippleModule, [{
-    type: NgModule,
-    args: [{
-      imports: [Ripple],
-      exports: [Ripple]
-    }]
-  }], null, null);
-})();
-
 // node_modules/@primeuix/styles/dist/button/index.mjs
-var style3 = `
+var style2 = `
     .p-button {
         display: inline-flex;
         cursor: pointer;
@@ -1516,7 +1318,7 @@ function Button_p_badge_6_Template(rf, ctx) {
     ɵɵproperty("value", ctx_r0.badge)("severity", ctx_r0.badgeSeverity);
   }
 }
-var classes3 = {
+var classes2 = {
   root: ({
     instance
   }) => ["p-button p-component", {
@@ -1551,8 +1353,8 @@ var classes3 = {
 };
 var ButtonStyle = class _ButtonStyle extends BaseStyle {
   name = "button";
-  theme = style3;
-  classes = classes3;
+  theme = style2;
+  classes = classes2;
   static ɵfac = /* @__PURE__ */ (() => {
     let ɵButtonStyle_BaseFactory;
     return function ButtonStyle_Factory(__ngFactoryType__) {
@@ -1705,7 +1507,7 @@ var ButtonDirective = class _ButtonDirective extends BaseComponent {
   set buttonProps(val) {
     this._buttonProps = val;
     if (val && typeof val === "object") {
-      Object.entries(val).forEach(([k, v2]) => this[`_${k}`] !== v2 && (this[`_${k}`] = v2));
+      Object.entries(val).forEach(([k, v]) => this[`_${k}`] !== v && (this[`_${k}`] = v));
     }
   }
   _severity;
@@ -2583,7 +2385,6 @@ var ButtonModule = class _ButtonModule {
 export {
   Badge,
   BadgeModule,
-  Ripple,
   ButtonStyle,
   ButtonClasses,
   ButtonLabel,
@@ -2592,4 +2393,4 @@ export {
   Button,
   ButtonModule
 };
-//# sourceMappingURL=chunk-2DNS2XUN.js.map
+//# sourceMappingURL=chunk-DKRGANKC.js.map

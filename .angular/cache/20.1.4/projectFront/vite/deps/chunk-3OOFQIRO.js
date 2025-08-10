@@ -87,6 +87,15 @@ function $(e = {}, t2 = {}) {
 function w(...e) {
   return e.reduce((t2, n, r) => r === 0 ? n : $(t2, n), {});
 }
+function q(e, t2) {
+  let n;
+  if (s(e)) try {
+    n = e.findLast(t2);
+  } catch (r) {
+    n = [...e].reverse().find(t2);
+  }
+  return n;
+}
 function M(e, t2) {
   let n = -1;
   if (s(e)) try {
@@ -325,7 +334,13 @@ function A(t2, e = {}) {
     });
   }
 }
-function q(t2, e = {}) {
+function U2(t2, e = {}, ...o) {
+  if (t2) {
+    let n = document.createElement(t2);
+    return A(n, e), n.append(...o), n;
+  }
+}
+function q2(t2, e = {}) {
   return t2 ? `<style${Object.entries(e).reduce((o, [n, r]) => o + ` ${n}="${r}"`, "")}>${t2}</style>` : "";
 }
 function ht(t2, e) {
@@ -345,6 +360,12 @@ function z2(t2, e) {
 }
 function bt(t2, e) {
   t2 && document.activeElement !== t2 && t2.focus(e);
+}
+function Q(t2, e) {
+  if (p2(t2)) {
+    let o = t2.getAttribute(e);
+    return isNaN(o) ? o === "true" || o === "false" ? o === "true" : o : +o;
+  }
 }
 function b2(t2, e = "") {
   let o = Y2(t2, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${e},
@@ -435,6 +456,12 @@ function Kt(t2, e = "", o) {
   p2(t2) && o !== null && o !== void 0 && t2.setAttribute(e, o);
 }
 
+// node_modules/@primeuix/utils/dist/uuid/index.mjs
+var t = {};
+function s2(n = "pui_id_") {
+  return Object.hasOwn(t, n) || (t[n] = 0), t[n]++, `${n}${t[n]}`;
+}
+
 // node_modules/@primeuix/utils/dist/classnames/index.mjs
 function f(...e) {
   if (e) {
@@ -454,7 +481,7 @@ function f(...e) {
 }
 
 // node_modules/@primeuix/utils/dist/eventbus/index.mjs
-function s2() {
+function s3() {
   let r = /* @__PURE__ */ new Map();
   return { on(e, t2) {
     let n = r.get(e);
@@ -470,12 +497,6 @@ function s2() {
   }, clear() {
     r.clear();
   } };
-}
-
-// node_modules/@primeuix/utils/dist/uuid/index.mjs
-var t = {};
-function s3(n = "pui_id_") {
-  return Object.hasOwn(t, n) || (t[n] = 0), t[n]++, `${n}${t[n]}`;
 }
 
 // node_modules/@primeuix/utils/dist/zindex/index.mjs
@@ -503,6 +524,7 @@ export {
   B,
   i,
   w,
+  q,
   M,
   m,
   p,
@@ -516,7 +538,7 @@ export {
   G,
   Y,
   ee,
-  s2,
+  s3 as s2,
   f,
   R2 as R,
   W,
@@ -534,11 +556,13 @@ export {
   j2,
   ut,
   A,
-  q,
+  U2,
+  q2,
   ht,
   Y2,
   z2,
   bt,
+  Q,
   b2,
   vt,
   Tt,
@@ -554,6 +578,6 @@ export {
   Zt,
   Jt,
   Kt,
-  s3
+  s2 as s3
 };
-//# sourceMappingURL=chunk-TWPC2OMC.js.map
+//# sourceMappingURL=chunk-3OOFQIRO.js.map

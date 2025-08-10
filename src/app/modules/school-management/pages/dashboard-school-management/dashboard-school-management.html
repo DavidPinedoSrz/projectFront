@@ -1,0 +1,13 @@
+<div class="grid">
+    <div class="col-12 md:col-3">
+        <p-card header="Menú de Navegación">
+            <p-panelMenu [model]="items" [multiple]="false"></p-panelMenu>
+        </p-card>
+    </div>
+
+    <div class="col-12 md:col-9">
+        <p-card header="Información Escolar">
+            <router-outlet></router-outlet>
+        </p-card>
+    </div>
+</div>
