@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import { FMPTheme } from '../fmptheme';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -10,6 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     providePrimeNG({
                     theme: {
                         preset: FMPTheme,
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
                             darkModeSelector: false || 'none'
                         }
                     }
-                })
+                }),
+                
   ]
 };

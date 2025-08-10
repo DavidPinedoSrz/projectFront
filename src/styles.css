@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
-@plugin "tailwindcss-primeui";
+/* @plugin "tailwindcss-primeui"; */ /* esta linea hace que no me funcione el tailwind */
+@import "primeicons/primeicons.css";
 
 @font-face {
     font-family: Montserrat;

@@ -45,10 +45,6 @@ const routes: Routes = [
          path: 'subject-list',
          component: SubjectList
       },
-      //{ 
-        // path: 'recover',
-        // component: Recover
-      //},
       { path: '**', redirectTo: 'login' }
     ]
   },
