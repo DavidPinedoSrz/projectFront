@@ -1,24 +1,38 @@
-import { Component, ViewChild } from '@angular/core';
-import { DrawerModule } from 'primeng/drawer';
-import { ButtonModule } from 'primeng/button';
-import { Ripple } from 'primeng/ripple';
-import { AvatarModule } from 'primeng/avatar';
-import { StyleClass } from 'primeng/styleclass';
-import { Drawer } from 'primeng/drawer';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '@angular/core';
+import { AcademicLevel } from '../../../../../interfaces/iAcademic-level';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { AcademicLevelService } from '../../../../../services/academic-level/academic-level.service';
+import { DatePipe } from '@angular/common';
+
+interface Column {
+    field: string;
+    header: string;
+}
 
 @Component({
-    selector: 'drawer-headless-demo',
-    templateUrl: './academic-level-list.html',
-    standalone: true,
-    imports: [DrawerModule, ButtonModule, Ripple, AvatarModule, StyleClass]
+  selector: 'app-academic-level-list',
+  standalone: true,
+  imports: [TableModule, CommonModule, DatePipe],
+  templateUrl: './academic-level-list.html',
+  styleUrls: ['./academic-level-list.css']
 })
 export class AcademicLevelList {
-    @ViewChild('drawerRef') drawerRef!: Drawer;
+    academicLevels!: AcademicLevel[];
+    cols!: Column[];
 
-    closeCallback(e: any): void {
-        this.drawerRef.close(e);
+    constructor(private academicLevelService: AcademicLevelService) {}
+
+    ngOnInit() {
+        this.academicLevels = this.academicLevelService.getAllAcademicLevels();
+
+        this.cols = [
+            { field: 'id', header: 'ID' },
+            { field: 'name', header: 'Nombre' },
+            { field: 'school_id', header: 'ID Escuela' },
+            { field: 'cct', header: 'CCT' },
+            { field: 'registration_dt', header: 'Fecha Registro' },
+            { field: 'inc_unam', header: 'Clave UNAM' }
+        ];
     }
-
-    visible: boolean = false;
 }

@@ -1,37 +1,55 @@
 import { Component } from '@angular/core';
 import { School } from '../../../../../interfaces/iSchool';
-import { DatabaseService } from '../../../../../services/database.service';
 import { TableModule } from 'primeng/table';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { SchoolService } from '../../../../../services/school/school.service';
 
 interface Column {
     field: string;
-   header: string;
+    header: string;
 }
 
 @Component({
   selector: 'app-school-list',
   standalone: true,
-  imports: [TableModule, CommonModule],
+  imports: [TableModule, CommonModule, DatePipe],
   templateUrl: './school-list.html',
-  styleUrl: './school-list.css'
+  styleUrls: ['./school-list.css']
 })
 export class SchoolList {
     schools!: School[];
     cols!: Column[];
+    loading: boolean = true;
 
-    constructor(private db: DatabaseService) {}
+    constructor(private schoolService: SchoolService) {}
 
     ngOnInit() {
-        // Obtener las escuelas del servicio
-        this.schools = this.db.getSchools();
+        this.loadSchools();
+        this.initColumns();
+    }
 
-        // Configurar las columnas de la tabla
+    loadSchools() {
+        this.loading = true;
+        this.schools = this.schoolService.getAllSchools();
+        this.loading = false;
+    }
+
+    initColumns() {
         this.cols = [
             { field: 'id', header: 'ID' },
             { field: 'name', header: 'Nombre' },
             { field: 'identifier_alias', header: 'Alias' },
-            { field: 'registration_dt', header: 'Fecha de Registro' }
+            { field: 'registration_dt', header: 'Fecha de Registro' },
+            { field: 'actions', header: 'Acciones' }
         ];
+    }
+
+    deleteSchool(id: number) {
+        if (confirm('¿Estás seguro de eliminar esta escuela?')) {
+            const success = this.schoolService.deleteSchool(id);
+            if (success) {
+                this.loadSchools();
+            }
+        }
     }
 }

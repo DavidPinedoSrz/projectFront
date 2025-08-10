@@ -1,16 +1,21 @@
 import {
-  BaseEditableHolder,
-  BaseInput
-} from "./chunk-S244ZJ27.js";
+  Badge,
+  BadgeModule,
+  Button,
+  ButtonModule,
+  Ripple
+} from "./chunk-2DNS2XUN.js";
 import {
   Scroller,
   ScrollerModule
 } from "./chunk-RLYIWTI5.js";
 import {
+  BaseEditableHolder,
+  BaseInput,
   ObjectUtils,
   UniqueComponentId,
   zindexutils
-} from "./chunk-LDR7L5RW.js";
+} from "./chunk-BJIWS2KY.js";
 import {
   animate,
   animation,
@@ -21,18 +26,17 @@ import {
   useAnimation
 } from "./chunk-37LRTIDD.js";
 import {
-  Badge,
-  BadgeModule,
-  Button,
-  ButtonModule
-} from "./chunk-SIG6E6L3.js";
-import {
   AutoFocus,
   ConnectedOverlayScrollHandler,
   DomHandler,
   blockBodyScroll,
   unblockBodyScroll
 } from "./chunk-HF6SREFX.js";
+import {
+  InputText,
+  InputTextModule
+} from "./chunk-JURVNJFW.js";
+import "./chunk-DE4VPICM.js";
 import {
   AngleDoubleLeftIcon,
   AngleDoubleRightIcon,
@@ -61,14 +65,6 @@ import {
   TimesIcon,
   TrashIcon
 } from "./chunk-XW2C4SBT.js";
-import {
-  InputText,
-  InputTextModule
-} from "./chunk-JURVNJFW.js";
-import "./chunk-DE4VPICM.js";
-import {
-  Ripple
-} from "./chunk-3PX34G7U.js";
 import {
   BaseComponent
 } from "./chunk-GGGE67RJ.js";
