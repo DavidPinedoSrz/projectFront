@@ -5,5 +5,5 @@ export interface Grade {
   name: string;
   alias: string;
   registration_dt: Date;
-  deactivation_dt: Date;
+  deactivation_dt: Date | null;
 }

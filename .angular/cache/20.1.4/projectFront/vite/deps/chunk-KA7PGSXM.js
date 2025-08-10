@@ -1,4 +1,9 @@
 import {
+  Y,
+  c,
+  k
+} from "./chunk-TWPC2OMC.js";
+import {
   CommonModule
 } from "./chunk-ZE6V4YBD.js";
 import {
@@ -19,11 +24,6 @@ import {
   ɵɵprojection,
   ɵɵprojectionDef
 } from "./chunk-S3NPCEDV.js";
-import {
-  Y,
-  c,
-  k
-} from "./chunk-RJVX4YB3.js";
 
 // node_modules/primeng/fesm2022/primeng-api.mjs
 var _c0 = ["*"];
@@ -941,4 +941,4 @@ export {
   TranslationKeys,
   TreeDragDropService
 };
-//# sourceMappingURL=chunk-JI6UNIIA.js.map
+//# sourceMappingURL=chunk-KA7PGSXM.js.map

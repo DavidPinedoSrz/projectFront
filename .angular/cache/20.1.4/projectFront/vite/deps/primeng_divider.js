@@ -1,12 +1,14 @@
 import {
   BaseComponent
-} from "./chunk-CIU4N2H6.js";
+} from "./chunk-GGGE67RJ.js";
 import {
   BaseStyle
-} from "./chunk-LGD7LJIX.js";
+} from "./chunk-573MFGI2.js";
 import {
   SharedModule
-} from "./chunk-JI6UNIIA.js";
+} from "./chunk-KA7PGSXM.js";
+import "./chunk-UOCIRRDD.js";
+import "./chunk-TWPC2OMC.js";
 import {
   CommonModule
 } from "./chunk-ZE6V4YBD.js";
@@ -34,8 +36,6 @@ import {
   ɵɵprojectionDef,
   ɵɵstyleMap
 } from "./chunk-S3NPCEDV.js";
-import "./chunk-RBMIZZTV.js";
-import "./chunk-RJVX4YB3.js";
 import "./chunk-WDMUDEB6.js";
 
 // node_modules/@primeuix/styles/dist/divider/index.mjs
