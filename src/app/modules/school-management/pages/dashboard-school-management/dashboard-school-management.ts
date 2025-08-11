@@ -50,8 +50,8 @@ export class DashboardSchoolManagement {
       label: 'Campos Formativos',
       icon: 'pi pi-shield',
       items: [
-        { label: 'Listar Campos', icon: 'pi pi-list' },
-        { label: 'Crear Campo', icon: 'pi pi-plus' },
+        { label: 'Listar Campos', icon: 'pi pi-list', routerLink: '/school-management/field' },
+        { label: 'Crear Campo', icon: 'pi pi-plus', routerLink: '/school-management/field/new' },
         { label: 'Administrar Campos', icon: 'pi pi-cog' }
       ]
     }

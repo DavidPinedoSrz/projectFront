@@ -9,6 +9,8 @@ import { SchoolForm } from './pages/school/school-form/school-form';
 import { AcademicLevelForm } from './pages/academic-level/academic-level-form/academic-level-form';
 import { GradeForm } from './pages/grade/grade-form/grade-form';
 import { SubjectForm } from './pages/subject/subject-form/subject-form';
+import { FieldList } from './pages/field/field-list/field-list';
+import { FieldForm } from './pages/field/field-form/field-form';
 
 const routes: Routes = [
   {
@@ -30,6 +32,10 @@ const routes: Routes = [
       { path: 'subjects', component: SubjectList },
       { path: 'subjects/new', component: SubjectForm },
       { path: 'subjects/edit/:id', component: SubjectForm },
+
+      { path: 'field', component: FieldList },
+      { path: 'field/new', component: FieldForm },
+      { path: 'field/edit/:id', component: FieldForm },
       
       { path: '', redirectTo: 'schools', pathMatch: 'full' }
     ]

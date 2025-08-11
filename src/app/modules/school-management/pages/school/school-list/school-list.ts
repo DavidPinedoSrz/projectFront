@@ -40,7 +40,6 @@ export class SchoolList {
             { field: 'name', header: 'Nombre' },
             { field: 'identifier_alias', header: 'Alias' },
             { field: 'registration_dt', header: 'Fecha de Registro' },
-            { field: 'actions', header: 'Acciones' }
         ];
     }
 

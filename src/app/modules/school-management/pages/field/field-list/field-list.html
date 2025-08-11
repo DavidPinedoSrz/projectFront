@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="flex justify-content-between align-items-center mb-4">
+        <h2>Campos Formativos</h2>
+        <button pButton pRipple icon="pi pi-plus" label="Nuevo Campo" routerLink="/school-management/fields/new"
+            class="p-button-sm"></button>
+    </div>
+
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+
+    <p-table [columns]="cols" [value]="fields" [loading]="loading" [tableStyle]="{ 'min-width': '75rem' }"
+        styleClass="p-datatable-striped">
+        <ng-template #header let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <ng-container *ngIf="col.field === 'registration_dt'; else notDate">
+                        {{ rowData[col.field] | date:'shortDate' }}
+                    </ng-container>
+
+                    <ng-template #notDate>
+                        <ng-container *ngIf="col.field === 'status';">
+                            <p-tag [value]="getStatusText(rowData)" [severity]="getStatusTag(rowData)"></p-tag>
+                        </ng-container>
+
+                        <ng-container *ngIf="col.field === 'specialization'; else notSpecialization">
+                            {{ rowData[col.field] ? 'Sí' : 'No' }}
+                        </ng-container>
+
+                        <ng-template #notSpecialization>
+                            <ng-container *ngIf="col.field !== 'actions'; else actionsCell">
+                                {{ rowData[col.field] }}
+                            </ng-container>
+                        </ng-template>
+                    </ng-template>
+
+                    <ng-template #actionsCell>
+                        <div class="flex gap-2">
+                            <button pButton pRipple icon="pi pi-pencil"
+                                class="p-button-rounded p-button-text p-button-sm"
+                                [routerLink]="['/school-management/fields/edit', rowData.id]" tooltip="Editar"></button>
+                            <button pButton pRipple icon="pi pi-trash"
+                                class="p-button-rounded p-button-text p-button-sm p-button-danger"
+                                (click)="confirmDelete(rowData.id)" tooltip="Eliminar"></button>
+                        </div>
+                    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+            <tr>
+                <td [attr.colspan]="cols.length">
+                    No se encontraron campos formativos registrados
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
