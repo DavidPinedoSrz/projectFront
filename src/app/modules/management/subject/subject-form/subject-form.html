@@ -1,61 +1,42 @@
-<div>
-    <div class="py-11">
-        <div class="card flex justify-center space-x-4">
-            <p-floatlabel>
-                <input id="username" pInputText [(ngModel)]="value" />
-                <label for="username">Nombre de la Materia</label>
-            </p-floatlabel>
-            <p-floatlabel>
-                <input id="username" pInputText [(ngModel)]="value" />
-                <label for="username">Alias</label>
-            </p-floatlabel>
-            <div class="card flex justify-center">
-                <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
-                <p-button (click)="show()" label="Confirmar" />
+<div class="py-11">
+    <div class="card flex justify-center">
+        <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
+            <div class="flex flex-col gap-4">
+                <p-floatlabel>
+                    <input id="subjectName" pInputText formControlName="subjectName"
+                        [invalid]="isInvalid('subjectName')" />
+                    @if (isInvalid('subjectName')) {
+                    <p-message severity="error" size="small" variant="simple">
+                        El nombre de la materia es requerido.
+                    </p-message>
+                    }
+                    <label for="subjectName">Nombre de la Materia</label>
+                </p-floatlabel>
+
+                <p-floatlabel>
+                    <input id="alias" pInputText formControlName="alias" [invalid]="isInvalid('alias')" />
+                    @if (isInvalid('alias')) {
+                    <p-message severity="error" size="small" variant="simple">
+                        El alias es requerido.
+                    </p-message>
+                    }
+                    <label for="alias">Alias</label>
+                </p-floatlabel>
+
+                <button pButton type="submit" label="Crear Materia" [disabled]="subjectForm.invalid"></button>
             </div>
-        </div>
-        
-        
-        <div class="flex flex-wrap justify-center gap-2 mb-2">
-            
-            <p-button (click)="showDialog('top')" icon="pi pi-arrow-down" label="Top" severity="secondary"
-                styleClass="min-w-40" />
-            
-        </div>
-        
-        <p-dialog header="Error" [modal]="true" [(visible)]="visible2" [position]="position" [style]="{ width: '25rem' }">
-            <span class="text-surface-500 dark:text-surface-400 block mb-8">la materia no se cargo correctamente.</span>
-            
-           
+        </form>
+
+        <p-toast position="top-right"></p-toast>
+
+        <p-dialog header="Error" [modal]="true" [(visible)]="showErrorDialog" [style]="{ width: '25rem' }"
+            [position]="'center'">
+            <span class="text-surface-500 dark:text-surface-400 block mb-8">
+                La materia no se cargó correctamente. Por favor verifique los datos.
+            </span>
             <div class="flex justify-end gap-2">
-                
-                <p-button label="Aceptar" (click)="visible2 = false" />
+                <p-button label="Aceptar" (click)="showErrorDialog = false"></p-button>
             </div>
         </p-dialog>
-
-
-<form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
-    <div class="flex flex-col gap-1">
-        <input pInputText type="text" id="username" placeholder="Username" formControlName="username"
-            [invalid]="isInvalid('username')" />
-        @if (isInvalid('username')) {
-        <p-message severity="error" size="small" variant="simple">Username is required.</p-message>
-        }
-    </div>
-    <div class="flex flex-col gap-1">
-        <input pInputText type="email" id="email" placeholder="Email" formControlName="email"
-            [invalid]="isInvalid('email')" />
-        @if (isInvalid('email')) {
-        @if (exampleForm.get('email')?.errors?.['required']) {
-        <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
-        }
-        @if (exampleForm.get('email')?.errors?.['email']) {
-        <p-message severity="error" size="small" variant="simple">Please enter a valid email.</p-message>
-        }
-        }
-    </div>
-    <button pButton severity="secondary" type="submit"><span pButtonLabel>Submit</span></button>
-</form>
-
     </div>
 </div>
