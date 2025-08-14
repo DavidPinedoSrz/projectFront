@@ -1,19 +1,9 @@
 import {
   BaseComponent
-} from "./chunk-SZ3SGG3Z.js";
+} from "./chunk-URPWYWUR.js";
 import {
   BaseStyle
-} from "./chunk-PQYTYMDO.js";
-import {
-  C,
-  K,
-  O,
-  Qt,
-  Rt,
-  Tt,
-  W,
-  v
-} from "./chunk-UN3OQYHX.js";
+} from "./chunk-VL2V5MCF.js";
 import {
   isPlatformBrowser
 } from "./chunk-ZE6V4YBD.js";
@@ -33,6 +23,16 @@ import {
   ɵɵdefineNgModule,
   ɵɵgetInheritedFactory
 } from "./chunk-S3NPCEDV.js";
+import {
+  C,
+  K,
+  O,
+  Qt,
+  Rt,
+  Tt,
+  W,
+  v
+} from "./chunk-TEEXI4T5.js";
 
 // node_modules/@primeuix/styles/dist/ripple/index.mjs
 var style = "\n    .p-ink {\n        display: block;\n        position: absolute;\n        background: dt('ripple.background');\n        border-radius: 100%;\n        transform: scale(0);\n        pointer-events: none;\n    }\n\n    .p-ink-active {\n        animation: ripple 0.4s linear;\n    }\n\n    @keyframes ripple {\n        100% {\n            opacity: 0;\n            transform: scale(2.5);\n        }\n    }\n";
@@ -227,6 +227,9 @@ var RippleModule = class _RippleModule {
 })();
 
 export {
-  Ripple
+  RippleStyle,
+  RippleClasses,
+  Ripple,
+  RippleModule
 };
-//# sourceMappingURL=chunk-DWBXVHMX.js.map
+//# sourceMappingURL=chunk-BPWKADPP.js.map

@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-subject-form',
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ButtonModule, 
     MessageModule, 
     ToastModule,
-    DialogModule
+    DialogModule,
+    RippleModule
   ],
   providers: [MessageService],
   templateUrl: './subject-form.html',
@@ -36,25 +38,32 @@ export class SubjectForm {
     private fb: FormBuilder,
     private messageService: MessageService
   ) {
+    // Nueva expresión regular que permite:
+    // - Letras (mayúsculas y minúsculas)
+    // - Números
+    // - Acentos y caracteres especiales en español (ñ, Ñ, á, é, í, ó, ú, ü)
+    // - Espacios
+    const textPattern = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+    
     this.subjectForm = this.fb.group({
-      subjectName: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
-      alias: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]]
+      subjectName: ['', [Validators.required, Validators.pattern(textPattern)]],
+      alias: ['', [Validators.required, Validators.pattern(textPattern)]]
     });
   }
 
   onSubmit() {
     if (this.subjectForm.valid) {
-      // Lógica para guardar la materia
       this.messageService.add({
+        key: 'main-toast',
         severity: 'success',
         summary: 'Éxito',
-        detail: 'La materia se cargó correctamente',
-        life: 3000
+        detail: 'La materia se creó correctamente',
+        life: 3000,
+        icon: 'pi pi-check-circle'
       });
       this.subjectForm.reset();
     } else {
       this.showErrorDialog = true;
-      // Marcar todos los campos como tocados para mostrar errores
       this.subjectForm.markAllAsTouched();
     }
   }

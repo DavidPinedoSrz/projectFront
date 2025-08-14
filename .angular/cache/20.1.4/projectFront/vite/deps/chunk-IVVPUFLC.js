@@ -1,13 +1,9 @@
 import {
   BaseComponent
-} from "./chunk-SZ3SGG3Z.js";
+} from "./chunk-URPWYWUR.js";
 import {
   BaseStyle
-} from "./chunk-PQYTYMDO.js";
-import {
-  f,
-  s3 as s
-} from "./chunk-UN3OQYHX.js";
+} from "./chunk-VL2V5MCF.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,6 +29,10 @@ import {
   ɵɵprojection,
   ɵɵprojectionDef
 } from "./chunk-S3NPCEDV.js";
+import {
+  f,
+  s3 as s
+} from "./chunk-TEEXI4T5.js";
 
 // node_modules/primeng/fesm2022/primeng-icons-baseicon.mjs
 var _c0 = ["*"];
@@ -3103,4 +3103,4 @@ export {
   WindowMaximizeIcon,
   WindowMinimizeIcon
 };
-//# sourceMappingURL=chunk-LBTLOUEL.js.map
+//# sourceMappingURL=chunk-IVVPUFLC.js.map

@@ -1,42 +1,62 @@
-<div class="py-11">
-    <div class="card flex justify-center">
-        <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
-            <div class="flex flex-col gap-4">
-                <p-floatlabel>
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Crear Nueva Materia</h1>
+            <p class="text-gray-600 mt-2">Complete los datos requeridos</p>
+        </div>
+
+        <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <div class="space-y-4">
+                <!-- Campo Nombre de Materia -->
+                <div class="p-float-label">
                     <input id="subjectName" pInputText formControlName="subjectName"
-                        [invalid]="isInvalid('subjectName')" />
-                    @if (isInvalid('subjectName')) {
-                    <p-message severity="error" size="small" variant="simple">
-                        El nombre de la materia es requerido.
-                    </p-message>
-                    }
-                    <label for="subjectName">Nombre de la Materia</label>
-                </p-floatlabel>
+                        [invalid]="isInvalid('subjectName')" class="w-full p-inputtext-lg" />
+                    <label for="subjectName" class="text-gray-700">Nombre de la Materia</label>
+                </div>
+                @if (isInvalid('subjectName')) {
+                <p-message severity="error" text="El nombre es requerido. Solo letras, números y acentos permitidos"
+                    class="w-full"></p-message>
+                }
 
-                <p-floatlabel>
-                    <input id="alias" pInputText formControlName="alias" [invalid]="isInvalid('alias')" />
-                    @if (isInvalid('alias')) {
-                    <p-message severity="error" size="small" variant="simple">
-                        El alias es requerido.
-                    </p-message>
-                    }
-                    <label for="alias">Alias</label>
-                </p-floatlabel>
+                <!-- Campo Alias -->
+                <div class="p-float-label mt-6">
+                    <input id="alias" pInputText formControlName="alias" [invalid]="isInvalid('alias')"
+                        class="w-full p-inputtext-lg" />
+                    <label for="alias" class="text-gray-700">Alias</label>
+                </div>
+                @if (isInvalid('alias')) {
+                <p-message severity="error" text="El alias es requerido. Solo letras, números y acentos permitidos"
+                    class="w-full"></p-message>
+                }
+            </div>
 
-                <button pButton type="submit" label="Crear Materia" [disabled]="subjectForm.invalid"></button>
+            <div class="pt-4">
+                <button pButton type="submit" label="Crear Materia" icon="pi pi-check" iconPos="right"
+                    class="w-full p-button-lg" [disabled]="subjectForm.invalid"
+                    [ngClass]="{'p-button-success': subjectForm.valid, 'p-button-secondary': subjectForm.invalid}">
+                </button>
             </div>
         </form>
 
-        <p-toast position="top-right"></p-toast>
+        <p-toast position="top-right" key="main-toast" [style]="{ 'margin-top': '70px', 'width': '350px' }"
+            [showTransformOptions]="'translateX(100%)'" [hideTransformOptions]="'translateX(100%)'">
+        </p-toast>
 
-        <p-dialog header="Error" [modal]="true" [(visible)]="showErrorDialog" [style]="{ width: '25rem' }"
-            [position]="'center'">
-            <span class="text-surface-500 dark:text-surface-400 block mb-8">
-                La materia no se cargó correctamente. Por favor verifique los datos.
-            </span>
-            <div class="flex justify-end gap-2">
-                <p-button label="Aceptar" (click)="showErrorDialog = false"></p-button>
+        <p-dialog header="Error al crear materia" [(visible)]="showErrorDialog" [modal]="true"
+            [style]="{ width: '450px' }" [draggable]="false" [resizable]="false">
+            <div class="flex flex-col items-center text-center">
+                <i class="pi pi-exclamation-triangle text-6xl text-red-500 mb-4"></i>
+                <p class="text-gray-700 mb-6">La materia no se pudo crear. Por favor verifique que:</p>
+                <ul class="list-disc text-left text-gray-600 pl-5 mb-6">
+                    <li>Ambos campos estén completos</li>
+                    <li>No contengan caracteres especiales (@, #, $, etc.)</li>
+                    <li>Los acentos y ñ/Ñ están permitidos</li>
+                </ul>
             </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Entendido" icon="pi pi-check" (click)="showErrorDialog = false"
+                    class="p-button-text"></button>
+            </ng-template>
         </p-dialog>
     </div>
 </div>
