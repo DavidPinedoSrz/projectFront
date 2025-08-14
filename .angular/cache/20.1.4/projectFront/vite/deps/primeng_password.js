@@ -1,13 +1,22 @@
 import {
-  BaseEditableHolder,
-  BaseInput
-} from "./chunk-DSWKLTZD.js";
-import {
-  InputText
-} from "./chunk-QVEYXQDX.js";
-import {
   zindexutils
-} from "./chunk-CAXFGXQ5.js";
+} from "./chunk-TNWZTUEL.js";
+import {
+  AutoFocus,
+  ConnectedOverlayScrollHandler,
+  DomHandler
+} from "./chunk-ZSVVX3QW.js";
+import {
+  BaseModelHolder,
+  InputText
+} from "./chunk-HD43DQ2A.js";
+import {
+  Fluid
+} from "./chunk-VHSGL2FH.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-OBNYVACI.js";
+import "./chunk-JITWH7QH.js";
 import {
   animate,
   style,
@@ -15,31 +24,21 @@ import {
   trigger
 } from "./chunk-B5NGOYYG.js";
 import {
-  AutoFocus
-} from "./chunk-CV74GLZM.js";
-import {
-  ConnectedOverlayScrollHandler,
-  DomHandler
-} from "./chunk-XTGZKIC7.js";
-import {
-  Fluid
-} from "./chunk-JYRPMEFV.js";
-import {
   EyeIcon,
   EyeSlashIcon,
   TimesIcon
-} from "./chunk-XEIIKGY4.js";
-import "./chunk-Y3JJ3F6U.js";
+} from "./chunk-LBTLOUEL.js";
+import "./chunk-SZ3SGG3Z.js";
 import {
   BaseStyle
-} from "./chunk-OLCDJS63.js";
+} from "./chunk-PQYTYMDO.js";
 import {
   OverlayService,
   PrimeTemplate,
   SharedModule,
   TranslationKeys
-} from "./chunk-Q5CVQUQP.js";
-import "./chunk-KKK3DQYO.js";
+} from "./chunk-F5I3ZI4S.js";
+import "./chunk-B7NM76AF.js";
 import {
   D,
   I,
@@ -48,10 +47,7 @@ import {
   W,
   Yt,
   v
-} from "./chunk-3I7M2XSQ.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-OBNYVACI.js";
+} from "./chunk-UN3OQYHX.js";
 import {
   CommonModule,
   NgIf,
@@ -123,6 +119,232 @@ import {
   ɵɵviewQuery
 } from "./chunk-S3NPCEDV.js";
 import "./chunk-WDMUDEB6.js";
+
+// node_modules/primeng/fesm2022/primeng-baseeditableholder.mjs
+var BaseEditableHolder = class _BaseEditableHolder extends BaseModelHolder {
+  /**
+   * There must be a value (if set).
+   * @defaultValue false
+   * @group Props
+   */
+  required = input(void 0, ...ngDevMode ? [{
+    debugName: "required",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the component should have invalid state style.
+   * @defaultValue false
+   * @group Props
+   */
+  invalid = input(void 0, ...ngDevMode ? [{
+    debugName: "invalid",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the component should have disabled state style.
+   * @defaultValue false
+   * @group Props
+   */
+  disabled = input(void 0, ...ngDevMode ? [{
+    debugName: "disabled",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * When present, it specifies that the name of the input.
+   * @defaultValue undefined
+   * @group Props
+   */
+  name = input(...ngDevMode ? [void 0, {
+    debugName: "name"
+  }] : []);
+  _disabled = signal(false, ...ngDevMode ? [{
+    debugName: "_disabled"
+  }] : []);
+  $disabled = computed(() => this.disabled() || this._disabled(), ...ngDevMode ? [{
+    debugName: "$disabled"
+  }] : []);
+  onModelChange = () => {
+  };
+  onModelTouched = () => {
+  };
+  writeDisabledState(value) {
+    this._disabled.set(value);
+  }
+  writeControlValue(value, setModelValue) {
+  }
+  /**** Angular ControlValueAccessors ****/
+  writeValue(value) {
+    this.writeControlValue(value, this.writeModelValue.bind(this));
+  }
+  registerOnChange(fn) {
+    this.onModelChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onModelTouched = fn;
+  }
+  setDisabledState(val) {
+    this.writeDisabledState(val);
+    this.cd.markForCheck();
+  }
+  static ɵfac = /* @__PURE__ */ (() => {
+    let ɵBaseEditableHolder_BaseFactory;
+    return function BaseEditableHolder_Factory(__ngFactoryType__) {
+      return (ɵBaseEditableHolder_BaseFactory || (ɵBaseEditableHolder_BaseFactory = ɵɵgetInheritedFactory(_BaseEditableHolder)))(__ngFactoryType__ || _BaseEditableHolder);
+    };
+  })();
+  static ɵdir = ɵɵdefineDirective({
+    type: _BaseEditableHolder,
+    inputs: {
+      required: [1, "required"],
+      invalid: [1, "invalid"],
+      disabled: [1, "disabled"],
+      name: [1, "name"]
+    },
+    features: [ɵɵInheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BaseEditableHolder, [{
+    type: Directive,
+    args: [{
+      standalone: true
+    }]
+  }], null, null);
+})();
+
+// node_modules/primeng/fesm2022/primeng-baseinput.mjs
+var BaseInput = class _BaseInput extends BaseEditableHolder {
+  pcFluid = inject(Fluid, {
+    optional: true,
+    host: true,
+    skipSelf: true
+  });
+  /**
+   * Spans 100% width of the container when enabled.
+   * @defaultValue false
+   * @group Props
+   */
+  fluid = input(void 0, ...ngDevMode ? [{
+    debugName: "fluid",
+    transform: booleanAttribute
+  }] : [{
+    transform: booleanAttribute
+  }]);
+  /**
+   * Specifies the input variant of the component.
+   * @defaultValue 'outlined'
+   * @group Props
+   */
+  variant = input(...ngDevMode ? [void 0, {
+    debugName: "variant"
+  }] : []);
+  /**
+   * Specifies the size of the component.
+   * @defaultValue undefined
+   * @group Props
+   */
+  size = input(...ngDevMode ? [void 0, {
+    debugName: "size"
+  }] : []);
+  /**
+   * Specifies the visible width of the input element in characters.
+   * @defaultValue undefined
+   * @group Props
+   */
+  inputSize = input(...ngDevMode ? [void 0, {
+    debugName: "inputSize"
+  }] : []);
+  /**
+   * Specifies the value must match the pattern.
+   * @defaultValue undefined
+   * @group Props
+   */
+  pattern = input(...ngDevMode ? [void 0, {
+    debugName: "pattern"
+  }] : []);
+  /**
+   * The value must be greater than or equal to the value.
+   * @defaultValue undefined
+   * @group Props
+   */
+  min = input(...ngDevMode ? [void 0, {
+    debugName: "min"
+  }] : []);
+  /**
+   * The value must be less than or equal to the value.
+   * @defaultValue undefined
+   * @group Props
+   */
+  max = input(...ngDevMode ? [void 0, {
+    debugName: "max"
+  }] : []);
+  /**
+   * Unless the step is set to the any literal, the value must be min + an integral multiple of the step.
+   * @defaultValue undefined
+   * @group Props
+   */
+  step = input(...ngDevMode ? [void 0, {
+    debugName: "step"
+  }] : []);
+  /**
+   * The number of characters (code points) must not be less than the value of the attribute, if non-empty.
+   * @defaultValue undefined
+   * @group Props
+   */
+  minlength = input(...ngDevMode ? [void 0, {
+    debugName: "minlength"
+  }] : []);
+  /**
+   * The number of characters (code points) must not exceed the value of the attribute.
+   * @defaultValue undefined
+   * @group Props
+   */
+  maxlength = input(...ngDevMode ? [void 0, {
+    debugName: "maxlength"
+  }] : []);
+  $variant = computed(() => this.variant() || this.config.inputStyle() || this.config.inputVariant(), ...ngDevMode ? [{
+    debugName: "$variant"
+  }] : []);
+  get hasFluid() {
+    return this.fluid() ?? !!this.pcFluid;
+  }
+  static ɵfac = /* @__PURE__ */ (() => {
+    let ɵBaseInput_BaseFactory;
+    return function BaseInput_Factory(__ngFactoryType__) {
+      return (ɵBaseInput_BaseFactory || (ɵBaseInput_BaseFactory = ɵɵgetInheritedFactory(_BaseInput)))(__ngFactoryType__ || _BaseInput);
+    };
+  })();
+  static ɵdir = ɵɵdefineDirective({
+    type: _BaseInput,
+    inputs: {
+      fluid: [1, "fluid"],
+      variant: [1, "variant"],
+      size: [1, "size"],
+      inputSize: [1, "inputSize"],
+      pattern: [1, "pattern"],
+      min: [1, "min"],
+      max: [1, "max"],
+      step: [1, "step"],
+      minlength: [1, "minlength"],
+      maxlength: [1, "maxlength"]
+    },
+    features: [ɵɵInheritDefinitionFeature]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(BaseInput, [{
+    type: Directive,
+    args: [{
+      standalone: true
+    }]
+  }], null, null);
+})();
 
 // node_modules/@primeuix/styles/dist/password/index.mjs
 var style2 = "\n    .p-password {\n        display: inline-flex;\n        position: relative;\n    }\n\n    .p-password .p-password-overlay {\n        min-width: 100%;\n    }\n\n    .p-password-meter {\n        height: dt('password.meter.height');\n        background: dt('password.meter.background');\n        border-radius: dt('password.meter.border.radius');\n    }\n\n    .p-password-meter-label {\n        height: 100%;\n        width: 0;\n        transition: width 1s ease-in-out;\n        border-radius: dt('password.meter.border.radius');\n    }\n\n    .p-password-meter-weak {\n        background: dt('password.strength.weak.background');\n    }\n\n    .p-password-meter-medium {\n        background: dt('password.strength.medium.background');\n    }\n\n    .p-password-meter-strong {\n        background: dt('password.strength.strong.background');\n    }\n\n    .p-password-fluid {\n        display: flex;\n    }\n\n    .p-password-fluid .p-password-input {\n        width: 100%;\n    }\n\n    .p-password-input::-ms-reveal,\n    .p-password-input::-ms-clear {\n        display: none;\n    }\n\n    .p-password-overlay {\n        padding: dt('password.overlay.padding');\n        background: dt('password.overlay.background');\n        color: dt('password.overlay.color');\n        border: 1px solid dt('password.overlay.border.color');\n        box-shadow: dt('password.overlay.shadow');\n        border-radius: dt('password.overlay.border.radius');\n    }\n\n    .p-password-content {\n        display: flex;\n        flex-direction: column;\n        gap: dt('password.content.gap');\n    }\n\n    .p-password-toggle-mask-icon {\n        inset-inline-end: dt('form.field.padding.x');\n        color: dt('password.icon.color');\n        position: absolute;\n        top: 50%;\n        margin-top: calc(-1 * calc(dt('icon.size') / 2));\n        width: dt('icon.size');\n        height: dt('icon.size');\n    }\n\n    .p-password-clear-icon {\n        position: absolute;\n        top: 50%;\n        margin-top: -0.5rem;\n        cursor: pointer;\n        inset-inline-end: dt('form.field.padding.x');\n        color: dt('form.field.icon.color');\n    }\n\n    .p-password:has(.p-password-toggle-mask-icon) .p-password-input {\n        padding-inline-end: calc((dt('form.field.padding.x') * 2) + dt('icon.size'));\n    }\n\n    .p-password:has(.p-password-toggle-mask-icon) .p-password-clear-icon {\n        inset-inline-end: calc((dt('form.field.padding.x') * 2) + dt('icon.size'));\n    }\n";

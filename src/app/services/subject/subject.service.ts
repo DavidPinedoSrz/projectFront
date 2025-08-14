@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '../../interfaces/iSubject';
+import { MSubject } from '../../models/nmanagement.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  private subjects: Subject[] = [
+  private subjects: MSubject[] = [
     // Materias para Primaria
     { id: 1, gradeId: 1, name: 'Matemáticas', code: 'MAT-1', description: 'Matemáticas básicas', hoursPerWeek: 5, isActive: true, fieldId: 1, createdAt: new Date('2020-01-15'), updatedAt: new Date('2020-01-15') },
     { id: 2, gradeId: 1, name: 'Español', code: 'ESP-1', description: 'Lengua materna', hoursPerWeek: 5, isActive: true, fieldId: 2, createdAt: new Date('2020-01-15'), updatedAt: new Date('2020-01-15') },
@@ -21,22 +21,22 @@ export class SubjectService {
 
   constructor() { }
 
-  getAllSubjects(): Subject[] {
+  getAllSubjects(): MSubject[] {
     return this.subjects;
   }
 
-  getSubjectsByGrade(gradeId: number): Subject[] {
+  getSubjectsByGrade(gradeId: number): MSubject[] {
     return this.subjects.filter(subject => subject.gradeId === gradeId);
   }
 
-  getSubjectById(id: number): Subject | undefined {
+  getSubjectById(id: number): MSubject | undefined {
     return this.subjects.find(subject => subject.id === id);
   }
 
-  addSubject(subject: Omit<Subject, 'id' | 'createdAt' | 'updatedAt'>): Subject {
+  addSubject(subject: Omit<MSubject, 'id' | 'createdAt' | 'updatedAt'>): MSubject {
     const newId = this.subjects.length > 0 ? Math.max(...this.subjects.map(s => s.id)) + 1 : 1;
     const now = new Date();
-    const newSubject: Subject = {
+    const newSubject: MSubject = {
       id: newId,
       createdAt: now,
       updatedAt: now,
@@ -46,7 +46,7 @@ export class SubjectService {
     return newSubject;
   }
 
-  updateSubject(id: number, subjectData: Partial<Omit<Subject, 'id' | 'createdAt'>>): Subject | undefined {
+  updateSubject(id: number, subjectData: Partial<Omit<MSubject, 'id' | 'createdAt'>>): MSubject | undefined {
     const index = this.subjects.findIndex(s => s.id === id);
     if (index !== -1) {
       this.subjects[index] = { 
