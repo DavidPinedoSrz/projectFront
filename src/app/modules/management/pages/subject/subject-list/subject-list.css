@@ -1,0 +1,21 @@
+/* Asegúrate de que los botones sean visibles */
+.p-speeddial-action {
+    min-width: 120px !important;
+    height: 2.5rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+.p-speeddial-button {
+    background: var(--primary-color) !important;
+}
+
+/* Estilo para los botones del SpeedDial */
+.p-speeddial-list button {
+    padding: 0.5rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.p-speeddial-list button .pi {
+    margin-right: 0.5rem !important;
+}

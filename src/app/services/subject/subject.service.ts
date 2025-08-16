@@ -1,67 +1,47 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { MSubject } from '../../models/nmanagement.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  private subjects: MSubject[] = [
-    // Materias para Primaria
-    { id: 1, gradeId: 1, name: 'Matemáticas', code: 'MAT-1', description: 'Matemáticas básicas', hoursPerWeek: 5, isActive: true, fieldId: 1, createdAt: new Date('2020-01-15'), updatedAt: new Date('2020-01-15') },
-    { id: 2, gradeId: 1, name: 'Español', code: 'ESP-1', description: 'Lengua materna', hoursPerWeek: 5, isActive: true, fieldId: 2, createdAt: new Date('2020-01-15'), updatedAt: new Date('2020-01-15') },
-    
-    // Materias para Secundaria
-    { id: 3, gradeId: 4, name: 'Álgebra', code: 'ALG-1', description: 'Álgebra básica', hoursPerWeek: 4, isActive: true, fieldId: 1, createdAt: new Date('2021-03-10'), updatedAt: new Date('2021-03-10') },
-    { id: 4, gradeId: 4, name: 'Biología', code: 'BIO-1', description: 'Introducción a la biología', hoursPerWeek: 3, isActive: true, fieldId: 3, createdAt: new Date('2021-03-10'), updatedAt: new Date('2021-03-10') },
-    
-    // Materias para Preparatoria
-    { id: 5, gradeId: 6, name: 'Cálculo Diferencial', code: 'CAL-1', description: 'Fundamentos de cálculo', hoursPerWeek: 6, isActive: true, fieldId: 1, createdAt: new Date('2019-05-20'), updatedAt: new Date('2019-05-20') },
-    { id: 6, gradeId: 6, name: 'Química I', code: 'QUI-1', description: 'Química general', hoursPerWeek: 4, isActive: true, fieldId: 3, createdAt: new Date('2019-05-20'), updatedAt: new Date('2019-05-20') }
-  ];
+  private subjects: MSubject[] = [];
+  private nextId = 1;
 
   constructor() { }
 
-  getAllSubjects(): MSubject[] {
-    return this.subjects;
-  }
-
-  getSubjectsByGrade(gradeId: number): MSubject[] {
-    return this.subjects.filter(subject => subject.gradeId === gradeId);
-  }
-
-  getSubjectById(id: number): MSubject | undefined {
-    return this.subjects.find(subject => subject.id === id);
-  }
-
-  addSubject(subject: Omit<MSubject, 'id' | 'createdAt' | 'updatedAt'>): MSubject {
-    const newId = this.subjects.length > 0 ? Math.max(...this.subjects.map(s => s.id)) + 1 : 1;
-    const now = new Date();
+  createSubject(subject: Omit<MSubject, 'id' | 'createdAt' | 'updatedAt'>): Observable<MSubject> {
     const newSubject: MSubject = {
-      id: newId,
-      createdAt: now,
-      updatedAt: now,
-      ...subject
+      ...subject,
+      id: this.nextId++,
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
     this.subjects.push(newSubject);
-    return newSubject;
+    return of(newSubject).pipe(delay(500));
   }
 
-  updateSubject(id: number, subjectData: Partial<Omit<MSubject, 'id' | 'createdAt'>>): MSubject | undefined {
-    const index = this.subjects.findIndex(s => s.id === id);
+  getSubjects(): Observable<MSubject[]> {
+    return of(this.subjects).pipe(delay(500));
+  }
+
+  getSubjectsByGradeId(gradeId: number): Observable<MSubject[]> {
+    const filtered = this.subjects.filter(s => s.gradeId === gradeId);
+    return of(filtered).pipe(delay(500));
+  }
+
+  getSubjectById(id: number): Observable<MSubject | undefined> {
+    const subject = this.subjects.find(s => s.id === id);
+    return of(subject).pipe(delay(500));
+  }
+
+  updateSubject(subject: MSubject): Observable<MSubject> {
+    const index = this.subjects.findIndex(s => s.id === subject.id);
     if (index !== -1) {
-      this.subjects[index] = { 
-        ...this.subjects[index], 
-        ...subjectData,
-        updatedAt: new Date()
-      };
-      return this.subjects[index];
+      this.subjects[index] = { ...subject, updatedAt: new Date() };
     }
-    return undefined;
-  }
-
-  deleteSubject(id: number): boolean {
-    const initialLength = this.subjects.length;
-    this.subjects = this.subjects.filter(subject => subject.id !== id);
-    return this.subjects.length !== initialLength;
+    return of(this.subjects[index]).pipe(delay(500));
   }
 }

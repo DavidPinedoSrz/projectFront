@@ -1,63 +1,70 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { MGrade } from '../../models/nmanagement.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GradeService {
-  private grades: MGrade[] = [
-    // Grados para Primaria (school_id: 1, level_id: 1)
-    { id: 1, order_index: 1, level_id: 1, name: 'Primer Grado', alias: '1ro', registration_dt: new Date('2020-01-15'), deactivation_dt: null },
-    { id: 2, order_index: 2, level_id: 1, name: 'Segundo Grado', alias: '2do', registration_dt: new Date('2020-01-15'), deactivation_dt: null },
-    { id: 3, order_index: 3, level_id: 1, name: 'Tercer Grado', alias: '3ro', registration_dt: new Date('2020-01-15'), deactivation_dt: null },
-    
-    // Grados para Secundaria (school_id: 1, level_id: 2)
-    { id: 4, order_index: 1, level_id: 2, name: 'Primer Grado', alias: '1ro', registration_dt: new Date('2021-03-10'), deactivation_dt: null },
-    { id: 5, order_index: 2, level_id: 2, name: 'Segundo Grado', alias: '2do', registration_dt: new Date('2021-03-10'), deactivation_dt: null },
-    { id: 6, order_index: 3, level_id: 2, name: 'Tercer Grado', alias: '3ro', registration_dt: new Date('2021-03-10'), deactivation_dt: null },
-
-    // Grados para Preparatoria (school_id: 2, level_id: 3)
-    { id: 7, order_index: 1, level_id: 3, name: 'Primer Grado', alias: '1er', registration_dt: new Date('2019-05-20'), deactivation_dt: null },
-    { id: 8, order_index: 2, level_id: 3, name: 'Segundo Grado', alias: '2do', registration_dt: new Date('2019-05-20'), deactivation_dt: null },
-    { id: 9, order_index: 2, level_id: 3, name: 'Tercer Grado', alias: '3ro', registration_dt: new Date('2019-05-20'), deactivation_dt: null }
-  ];
+  private grades: MGrade[] = [];
+  private nextId = 1;
 
   constructor() { }
 
-  getAllGrades(): MGrade[] {
-    return this.grades;
-  }
-
-  getGradesByLevel(levelId: number): MGrade[] {
-    return this.grades.filter(grade => grade.level_id === levelId);
-  }
-
-  getGradeById(id: number): MGrade | undefined {
-    return this.grades.find(grade => grade.id === id);
-  }
-
-  addGrade(grade: Omit<MGrade, 'id'>): MGrade {
-    const newId = this.grades.length > 0 ? Math.max(...this.grades.map(g => g.id)) + 1 : 1;
+  createGrade(grade: Omit<MGrade, 'id' | 'registration_dt' | 'deactivation_dt'>): Observable<MGrade> {
     const newGrade: MGrade = {
-      id: newId,
-      ...grade
+      ...grade,
+      id: this.nextId++,
+      registration_dt: new Date(),
+      deactivation_dt: null
     };
     this.grades.push(newGrade);
-    return newGrade;
+    return of(newGrade).pipe(delay(500));
   }
 
-  updateGrade(id: number, gradeData: Partial<MGrade>): MGrade | undefined {
-    const index = this.grades.findIndex(g => g.id === id);
-    if (index !== -1) {
-      this.grades[index] = { ...this.grades[index], ...gradeData };
-      return this.grades[index];
-    }
-    return undefined;
+  getGrades(): Observable<MGrade[]> {
+    return of(this.grades).pipe(delay(500));
   }
 
-  deleteGrade(id: number): boolean {
-    const initialLength = this.grades.length;
-    this.grades = this.grades.filter(grade => grade.id !== id);
-    return this.grades.length !== initialLength;
+  getGradeById(id: number): Observable<MGrade | undefined> {
+    const grade = this.grades.find(g => g.id === id);
+    return of(grade).pipe(delay(500));
+  }
+
+   updateGrade(updatedGrade: MGrade): Observable<MGrade> {
+    return new Observable(observer => {
+      // Simulamos un pequeño retraso de red
+      setTimeout(() => {
+        const index = this.grades.findIndex(g => g.id === updatedGrade.id);
+        if (index !== -1) {
+          // Mantenemos la fecha de registro original
+          updatedGrade.registration_dt = this.grades[index].registration_dt;
+          this.grades[index] = updatedGrade;
+          observer.next(updatedGrade);
+        } else {
+          // Si no encontramos el grado, podrías considerar crear uno nuevo
+          // o lanzar un error según tu lógica de negocio
+          observer.error('Grado no encontrado');
+        }
+        observer.complete();
+      }, 500);
+    });
+  }
+  deleteGrade(id: number): Observable<boolean> {
+    return new Observable(observer => {
+      // Simulamos un pequeño retraso de red
+      setTimeout(() => {
+        const index = this.grades.findIndex(g => g.id === id);
+        if (index !== -1) {
+          this.grades.splice(index, 1);
+          observer.next(true);
+        } else {
+          observer.next(false);
+        }
+        observer.complete();
+      }, 500);
+    });
   }
 }
+
