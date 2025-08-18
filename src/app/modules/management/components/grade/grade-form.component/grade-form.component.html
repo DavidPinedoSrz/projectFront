@@ -1,0 +1,92 @@
+<p-dialog header="Crear Grado" [modal]="true" [(visible)]="visible" [style]="{ width: '90vw', maxWidth: '40rem' }"
+    [contentStyle]="{ 'overflow-y': 'auto', 'min-height': '28rem' }" (onHide)="onHide()"
+    [breakpoints]="{ '640px': '95vw' }" [draggable]="false" [resizable]="false" [autoZIndex]="true"
+    [baseZIndex]="10000">
+
+    <!-- Header  -->
+    <div class="flex items-center gap-3 mb-6">
+        <i class="pi pi-graduation-cap text-primary text-xl"></i>
+        <h2 class="text-xl font-bold text-gray-800">Crear Nuevo Grado</h2>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+
+    <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 pb-4">
+        <!-- Fila superior: Nombre y Alias -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Campo Nombre -->
+            <div class="flex flex-col gap-2">
+                <p-floatLabel>
+                    <input pInputText id="nombre" formControlName="nombre"
+                        [ngClass]="{'p-invalid': (f['nombre'].invalid && (f['nombre'].touched || formSubmitted))}"
+                        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                        autocomplete="off" />
+                    <label for="nombre" class="text-gray-600">Nombre del Grado</label>
+                </p-floatLabel>
+                @if (f['nombre'].invalid && (f['nombre'].touched || formSubmitted)) {
+                <small class="text-red-500 text-sm flex items-center gap-1">
+                    <i class="pi pi-exclamation-circle"></i>
+                    @if (f['nombre'].errors?.['required']) {
+                    <span>Campo requerido</span>
+                    }
+                </small>
+                }
+            </div>
+
+            <!-- Campo Alias -->
+            <div class="flex flex-col gap-2">
+                <p-floatLabel>
+                    <input pInputText id="alias" formControlName="alias"
+                        [ngClass]="{'p-invalid': (f['alias'].invalid && (f['alias'].touched || formSubmitted))}"
+                        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                        autocomplete="off" />
+                    <label for="alias" class="text-gray-600">Alias</label>
+                </p-floatLabel>
+                @if (f['alias'].invalid && (f['alias'].touched || formSubmitted)) {
+                <small class="text-red-500 text-sm flex items-center gap-1">
+                    <i class="pi pi-exclamation-circle"></i>
+                    @if (f['alias'].errors?.['required']) {
+                    <span>Campo requerido</span>
+                    }
+                </small>
+                }
+            </div>
+        </div>
+
+        <!-- Fila del calendario con espacio adicional -->
+        <div class="min-h-[23rem]"> <!-- Espacio reservado para el calendario -->
+            <div class="flex justify-center mt-2">
+                <div class="w-full md:w-2/3">
+                    <p-floatLabel>
+                        <p-datepicker formControlName="fecha" [showIcon]="true" inputId="fecha" [readonlyInput]="true"
+                            [hideOnDateTimeSelect]="true"
+                            [ngClass]="{'p-invalid': (f['fecha'].invalid && (f['fecha'].touched || formSubmitted))}"
+                            class="w-full [&>input]:p-3 [&>input]:w-full [&>input]:border [&>input]:rounded-lg [&>input]:cursor-pointer"
+                            dateFormat="dd/mm/yy" [showButtonBar]="true"
+                            [panelStyleClass]="'shadow-lg border border-gray-200 rounded-lg mt-1 z-50'">
+                        </p-datepicker>
+                        <label for="fecha" class="text-gray-600">Fecha de Inicio</label>
+                    </p-floatLabel>
+                    @if (f['fecha'].invalid && (f['fecha'].touched || formSubmitted)) {
+                    <small class="text-red-500 text-sm flex items-center gap-1 justify-center relative z-40">
+                        <i class="pi pi-exclamation-circle"></i>
+                        <span>Seleccione una fecha</span>
+                    </small>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones con margen superior flexible -->
+        <div class="flex flex-col sm:flex-row justify-end gap-3 mt-auto pt-20">
+            <p-button label="Cancelar" severity="secondary" (click)="visible = false" icon="pi pi-times"
+                class="w-full sm:w-auto" styleClass="p-button-outlined hover:bg-gray-50 transition-colors"></p-button>
+
+            <button pButton type="submit" label="Guardar Grado" [disabled]="gradeForm.invalid" icon="pi pi-check"
+                class="w-full sm:w-auto" [ngClass]="{
+                    'opacity-50 cursor-not-allowed': gradeForm.invalid,
+                    'hover:bg-primary-600 transition-colors': gradeForm.valid
+                }"></button>
+        </div>
+    </form>
+</p-dialog>

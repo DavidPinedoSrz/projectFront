@@ -14,16 +14,19 @@
         </p-panelmenu>
     </div>
 
-    <!-- Contenido principal dinámico -->
+    <!-- Contenido principal dinámico  -->
     <div class="flex-1 p-6">
-        <!-- Renderizado condicional de componentes -->
         @if (currentView === 'crear-grados') {
-        <!-- <app-crear-grados /> -->
+        <app-grade-form-component [showDialog]="showGradeDialog" (dialogHide)="onGradeDialogHide()">
+        </app-grade-form-component>
         }
-        @else if (currentView === 'listar-grados') {
-        <!-- <app-listar-grados /> -->
+        @else if (currentView === 'crear-materias') {
+        <app-subject-form-component [showDialog]="showGradeDialog" (dialogHide)="onGradeDialogHide()">
+        </app-subject-form-component>
         }
-        
+        @else if (currentView === 'mostrar-materias') {
+        <app-subject-list-component></app-subject-list-component>
+        }
         @else {
         <div class="bg-white rounded-lg shadow p-6">
             <h1 class="text-2xl font-bold text-gray-800">Bienvenido al Sistema</h1>

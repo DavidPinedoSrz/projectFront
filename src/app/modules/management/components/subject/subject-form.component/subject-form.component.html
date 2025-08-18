@@ -1,0 +1,122 @@
+<p-dialog header="Crear Grado" [modal]="true" [(visible)]="visible" [style]="{ width: '90vw', maxWidth: '70rem' }"
+    [contentStyle]="{ 'overflow-y': 'auto', 'min-height': '45rem' }" (onHide)="onHide()"
+    [breakpoints]="{ '640px': '95vw' }" [draggable]="false" [resizable]="false" [autoZIndex]="true"
+    [baseZIndex]="10000">
+
+    <!-- Header mejorado -->
+    <div class="flex items-center gap-3 mb-6">
+        <i class="pi pi-graduation-cap text-primary text-xl"></i>
+        <h2 class="text-xl font-bold text-gray-800">Crear Nueva Materia</h2>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+
+    <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 pb-4">
+        <!-- Fila superior: Nombre y Alias -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Campo Nombre -->
+            <div class="flex flex-col gap-2">
+                <p-floatLabel>
+                    <input pInputText id="nombre" formControlName="nombre"
+                        [ngClass]="{'p-invalid': (f['nombre'].invalid && (f['nombre'].touched || formSubmitted))}"
+                        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                        autocomplete="off" />
+                    <label for="nombre" class="text-gray-600">Nombre de la materia</label>
+                </p-floatLabel>
+                @if (f['nombre'].invalid && (f['nombre'].touched || formSubmitted)) {
+                <small class="text-red-500 text-sm flex items-center gap-1">
+                    <i class="pi pi-exclamation-circle"></i>
+                    @if (f['nombre'].errors?.['required']) {
+                    <span>Campo requerido</span>
+                    }
+                </small>
+                }
+            </div>
+
+            <!-- Campo Clave -->
+            <div class="flex flex-col gap-2">
+                <p-floatLabel>
+                    <input pInputText id="clave" formControlName="clave"
+                        [ngClass]="{'p-invalid': (f['nombre'].invalid && (f['nombre'].touched || formSubmitted))}"
+                        class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                        autocomplete="off" />
+                    <label for="nombre" class="text-gray-600">Clave de la materia</label>
+                </p-floatLabel>
+                @if (f['nombre'].invalid && (f['nombre'].touched || formSubmitted)) {
+                <small class="text-red-500 text-sm flex items-center gap-1">
+                    <i class="pi pi-exclamation-circle"></i>
+                    @if (f['nombre'].errors?.['required']) {
+                    <span>Campo requerido</span>
+                    }
+                </small>
+                }
+            </div>
+
+            <!-- Campo Grado -->
+            <div class="flex flex-col gap-2">
+                <p-select [options]="grades" formControlName="gradeId" optionLabel="name"
+                    placeholder="Selecciona el Grado" class="w-full md:w-56" />
+            </div>
+
+            <!-- training_areas_id -->
+            <div class="flex flex-col gap-2">
+                <p-select [options]="trainingAreas" formControlName="training_areas_id" optionLabel="name"
+                    placeholder="Campo Formativo" class="w-full md:w-56" />
+            </div>
+
+            <!-- Campo optative_group -->
+            <div class="flex flex-col gap-2">
+                <p-select [options]="optative" formControlName="optative_group" optionLabel="name" placeholder="Optativa"
+                    class="w-full md:w-56" />
+            </div>
+
+            <!-- subject_type_id -->
+            <div class="flex flex-col gap-2">
+                <p-select [options]="subjectTypes" formControlName="subject_type_id" optionLabel="name" placeholder="Selecciona el tipo"
+                    class="w-full md:w-56" />
+            </div>
+
+            
+
+            <!-- workshop_id -->
+            <div class="flex flex-col gap-2">
+                <p-select [options]="workshops" formControlName="workshop_id" optionLabel="name"
+                    placeholder="Selecciona el taller" class="w-full md:w-56" />
+            </div>
+
+            <!-- Fila del calendario con espacio adicional -->
+            <div class="flex flex-col gap-2">
+                    <p-floatLabel>
+                        <p-datepicker formControlName="fecha" [showIcon]="true" inputId="fecha" [readonlyInput]="true"
+                            [hideOnDateTimeSelect]="true"
+                            [ngClass]="{'p-invalid': (f['fecha'].invalid && (f['fecha'].touched || formSubmitted))}"
+                            class="w-full [&>input]:p-3 [&>input]:w-full [&>input]:border [&>input]:rounded-lg [&>input]:cursor-pointer"
+                            dateFormat="dd/mm/yy" [showButtonBar]="true"
+                            [panelStyleClass]="'shadow-lg border border-gray-200 rounded-lg mt-1 z-50'">
+                        </p-datepicker>
+                        <label for="fecha" class="text-gray-600">Fecha de Inicio</label>
+                    </p-floatLabel>
+                    @if (f['fecha'].invalid && (f['fecha'].touched || formSubmitted)) {
+                    <small class="text-red-500 text-sm flex items-center gap-1 justify-center relative z-40">
+                        <i class="pi pi-exclamation-circle"></i>
+                        <span>Seleccione una fecha</span>
+                    </small>
+                    }
+            </div>
+            
+           
+        </div>
+
+        <!-- Botones con margen superior flexible -->
+        <div class="flex flex-col sm:flex-row justify-end gap-3 mt-auto ">
+            <p-button label="Cancelar" severity="secondary" (click)="visible = false" icon="pi pi-times"
+                class="w-full sm:w-auto" styleClass="p-button-outlined hover:bg-gray-50 transition-colors"></p-button>
+
+            <button pButton type="submit" label="Guardar Grado" [disabled]="gradeForm.invalid" icon="pi pi-check"
+                class="w-full sm:w-auto" [ngClass]="{
+                    'opacity-50 cursor-not-allowed': gradeForm.invalid,
+                    'hover:bg-primary-600 transition-colors': gradeForm.valid
+                }"></button>
+        </div>
+    </form>
+</p-dialog>
